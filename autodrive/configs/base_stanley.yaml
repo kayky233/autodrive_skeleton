@@ -1,0 +1,52 @@
+env:
+  type: fh5_dxgi                 # 仅标注；本入口内部用 mss 直接抓
+  monitor: { left: 185, top: 31, width: 1600, height: 900 }   # ⬅ 改成你的
+  roi: { y0: 620, y1: 860 }      # 底部 1/4~1/3 较稳（按需要微调）
+
+loop:
+  hz: 40
+
+perception:
+  type: lane_cv
+  mode: lab                      # 自适应 Lab ΔE，不靠固定 HSV
+  lab_window: [0.30, 0.18]       # 采样底部中间块（宽/高占比）
+  lab_delta: 16.0                # ΔE阈值 15~22 可微调
+
+state:
+  pix2meter: 0.02                # 像素→米的近似比例（按分辨率微调）
+  min_area: 1500                 # 掩膜最小面积（像素），过小视为识别失败
+
+planner:
+  vmax: 12.0                     # 目标巡航速度（m/s）~43km/h，起步稳
+
+controller:
+  type: stanley
+  L: 2.7
+  k: 2.5
+  epsi_gain: 1.4
+  v_soft: 0.3
+  ff_gain: 1.0
+  steer_limit: 0.8
+  steer_sign: -1.0      # 先尝试翻转输出方向
+  steer_bias: 0.0       # 如仍右偏，可尝试小幅正/负偏置（如 ±0.02 rad）
+  deadband: 0.0         # 先不启用死区
+  ey_sign: 1.0
+  hdg_sign: 1.0
+  ff_sign: 1.0
+
+speed:
+  vmax: 12.0
+  kp: 0.12
+  ki: 0.0
+  kd: 0.0
+  throttle_limit: 0.7
+  brake_limit: 0.9
+
+log:
+  enable: true
+  fields: [ts, ey, epsi, v, kappa, kappa_ahead, steer, throttle, brake]
+
+debug:
+  visualize: true                # 显示调试窗口（调好后可以关）
+  actuate: false                 # 启动时先不下发，按 p 开/关
+  save_frame_key: s              # 按键存图

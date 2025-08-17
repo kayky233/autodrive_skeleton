@@ -1,0 +1,15 @@
+name: autodrive
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy=1.26.4
+  - pillow<11.0
+  - pip
+  - pip:
+      - opencv-python==4.10.0.84
+      - mss==9.0.1
+      - vgamepad==0.1.0
+      - onnxruntime==1.17.3
+      - dxcam==0.0.9

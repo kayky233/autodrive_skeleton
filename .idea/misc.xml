@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="sdkName" value="kayky" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="autodrive" project-jdk-type="Python SDK" />
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="159.138.148.5" id="f6085e7e-dd7a-49b8-b5de-8e3ad1207e57" port="22" nameFormat="DESCRIPTIVE" username="kayky" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>
